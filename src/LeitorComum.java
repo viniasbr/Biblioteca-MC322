@@ -3,12 +3,12 @@ import java.util.Random;
 
 public class LeitorComum extends Leitor {
     private static int limite_livros = 5;
-    private ArrayList<LivroTradicional> listaLivrosTrad;
+    private ArrayList<LivroTradicional> listaLivrosTradLeitor;
 
 
     public LeitorComum(String nome, int idLeitor){
         super(nome, idLeitor);
-        listaLivrosTrad = new ArrayList<LivroTradicional> ();
+        listaLivrosTradLeitor = new ArrayList<LivroTradicional> ();
     }
 
     public static int getLimite_livros() {
@@ -19,12 +19,12 @@ public class LeitorComum extends Leitor {
         LeitorComum.limite_livros = limite_livros;
     }
 
-    public ArrayList<LivroTradicional> getListaLivrosTrad() {
-        return listaLivrosTrad;
+    public ArrayList<LivroTradicional> getListaLivrosTradLeitor() {
+        return listaLivrosTradLeitor;
     }
 
-    public void setListaLivrosTrad(ArrayList<LivroTradicional> listaLivrosTrad) {
-        this.listaLivrosTrad = listaLivrosTrad;
+    public void setListaLivrosTrad(ArrayList<LivroTradicional> listaLivrosTradLeitor) {
+        this.listaLivrosTradLeitor = listaLivrosTradLeitor;
     }
 
     // id do leitor comum eh sempre par

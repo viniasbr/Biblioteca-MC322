@@ -12,8 +12,9 @@ class Verificacoes {
         else
             return true;
     }
-    protected static boolean verificaLocalDate(String data)
-    {
+    
+    protected static boolean verificaLocalDate(String data){
+        // verificar se a data eh valida
         try {
             LocalDate.parse(data, formatadorData);
         } catch (Exception e) {
@@ -21,4 +22,6 @@ class Verificacoes {
         }
         return true;
     }
+
+
 }
