@@ -9,7 +9,6 @@ class Verificacoes {
         if(usuario.matches(".*\\s.*")){
             return false;
         }
-        else
             return true;
     }
     

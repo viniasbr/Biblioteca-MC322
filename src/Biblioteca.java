@@ -17,11 +17,11 @@ public class Biblioteca {
 
     public Biblioteca(String usuarioBibli){
         this.usuarioBibli = usuarioBibli;
-        this.listaLeitoresCred = new ArrayList<LeitorCredenciado>();
-        this.listaLeitoresCom = new ArrayList<LeitorComum>();
-        this.listaLivrosTrad = new ArrayList<LivroTradicional>();
-        this.listaLivrosRaros = new ArrayList<LivroRaro>();
-        this.listaEmprestimos = new ArrayList<Emprestimo>();
+        this.listaLeitoresCred = new ArrayList<>();
+        this.listaLeitoresCom = new ArrayList<>();
+        this.listaLivrosTrad = new ArrayList<>();
+        this.listaLivrosRaros = new ArrayList<>();
+        this.listaEmprestimos = new ArrayList<>();
         this.diaHoje = LocalDate.now();
     }
 
@@ -105,11 +105,12 @@ public class Biblioteca {
             String nome_cr = read.nextLine();
             boolean id_novo = false;
             int idLeitorCred = LeitorCredenciado.GeraIdLeitorCred();
-            while(id_novo == false){
+            while(!id_novo){
                 boolean encontrou = false;
                 for(LeitorCredenciado l : listaLeitoresCred){
                     if(l.getIdLeitor()==idLeitorCred){
                         encontrou = true;
+                        break;
                     }
                 }
                 if(!encontrou)
@@ -127,11 +128,12 @@ public class Biblioteca {
             String nome_co = read.nextLine();
             boolean id_novo = false;
             int idLeitorComum = LeitorComum.GeraIdLeitorComum();
-            while(id_novo == false){
+            while(!id_novo){
                 boolean encontrou = false;
                 for(LeitorComum l : listaLeitoresCom){
                     if(l.getIdLeitor()==idLeitorComum){
                         encontrou = true;
+                        break;
                     }
                 }
                 if(!encontrou)
@@ -184,7 +186,7 @@ public class Biblioteca {
         // percorrer lista de leitores comuns
         Leitor leitor = null;
         Livro livro = null;
-        LocalDate prazoEntrega = LocalDate.now();
+        LocalDate prazoEntrega;
         if(idLeitor%2==0){
             for(LeitorComum l : listaLeitoresCom){
                 if(l.getIdLeitor()==idLeitor){
@@ -194,7 +196,7 @@ public class Biblioteca {
         }
 
         // percorrer lista de leitores credenciados
-        else if(idLeitor%2!=0){
+        else{
             for(LeitorCredenciado l : listaLeitoresCred){
                 if(l.getIdLeitor()==idLeitor){
                     leitor = l;
@@ -213,7 +215,7 @@ public class Biblioteca {
         }
 
         // percorrer lista de livros raros
-        else if(idLivro%2!=0){
+        else{
             prazoEntrega = diaHoje.plus(LivroRaro.getPrazoDias(),ChronoUnit.DAYS);
             for(LivroRaro l : listaLivrosRaros){
                 if(l.getIdLivro()==idLivro){
@@ -236,19 +238,20 @@ public class Biblioteca {
 
         // verificar se o leitor comum vai passar do limite de livros dele
         if(leitor instanceof LeitorComum){
-            LeitorComum leitor_comum = (LeitorComum) leitor;
             int qntLivrosLeitorComum = 0;
-            qntLivrosLeitorComum += leitor_comum.getListaLivrosTradLeitor().size();
+            for(Emprestimo emp : listaEmprestimos)
+                if(emp.getLeitor().getIdLeitor() == idLeitor)
+                    qntLivrosLeitorComum++;
             if(qntLivrosLeitorComum==LeitorComum.getLimite_livros())
                 return false;
         }
 
         // verificar se o leitor cred vai passar do limite de livros dele
         if(leitor instanceof LeitorCredenciado){
-            LeitorCredenciado leitor_cred = (LeitorCredenciado) leitor;
             int qntLivrosLeitorCred = 0;
-            qntLivrosLeitorCred += leitor_cred.getListaLivrosRarosLeitor().size();
-            qntLivrosLeitorCred += leitor_cred.getListaLivrosTradLeitor().size();
+            for(Emprestimo emp : listaEmprestimos)
+                if(emp.getLeitor().getIdLeitor() == idLeitor)
+                    qntLivrosLeitorCred++;
             if(qntLivrosLeitorCred==LeitorCredenciado.getLimite_livros())
                 return false;
         }
@@ -273,8 +276,7 @@ public class Biblioteca {
     // mudar o livro pra nao usado
     // tirar do emprestimo da lista de emprestimos
 
-    protected boolean devolverLivro(int idLeitor, int idLivro){
-        Livro livro = null;
+    protected boolean devolverLivro(int idLivro){
         for(Emprestimo emp : listaEmprestimos){
             // achou o livro
             LocalDate dataEntrega = emp.getDataEntrega();
@@ -285,45 +287,6 @@ public class Biblioteca {
                 }
                 // o livro nao esta mais em uso
                 emp.getLivro().setEmUso(false);
-
-                // tirar da lista de livros do leitor -> 3 situacoes possiveis:
-                // 1) livro raro
-                // 2) livro trad leitor cred
-                // 3) livro trad leitor comum
-
-                // criar instancia de leitor cred ou de leitor comum
-                // (dependendo do id)
-
-                // livro raro e leitor credenciado
-                if(emp.getLivro().getIdLivro()%2!=0){
-                    LeitorCredenciado lcr = (LeitorCredenciado) emp.getLeitor();
-                    for(LivroRaro lr : lcr.getListaLivrosRarosLeitor()){
-                        if(lr.getIdLivro()==idLivro){
-                            lcr.getListaLivrosRarosLeitor().remove(livro);
-                        }
-                    }
-                }
-
-                // livro trad e leitor credencidado
-                if(emp.getLivro().getIdLivro()%2==0 && emp.getLeitor().getIdLeitor()%2!=0){
-                    LeitorCredenciado lcr = (LeitorCredenciado) emp.getLeitor();
-                    for(LivroTradicional lt : lcr.getListaLivrosTradLeitor()){
-                        if(lt.getIdLivro()==idLivro){
-                            lcr.getListaLivrosTradLeitor().remove(livro);
-                        }
-                    }
-                }
-
-                // livro trad e leitor comum
-                if(emp.getLivro().getIdLivro()%2==0 && emp.getLeitor().getIdLeitor()%2==0){
-                    LeitorComum lcomum = (LeitorComum) emp.getLeitor();
-                    for(LivroTradicional lt : lcomum.getListaLivrosTradLeitor()){
-                        if(lt.getIdLivro()==idLivro){
-                            lcomum.getListaLivrosTradLeitor().remove(livro);
-                        }
-                    }
-                }
-
                 // tirar o emprestimo da lista de emprestimos
                 listaEmprestimos.remove(emp);
                 return true;
@@ -336,12 +299,4 @@ public class Biblioteca {
     protected String listarLeitores(){
         return null;
     }
-
-
-    @Override
-    public String toString(){
-        String str = "";
-        return str;
-    }
-    
 }

@@ -3,8 +3,6 @@ public abstract class Livro {
     private String genero;
     private final int idLivro;
     private boolean emUso;
-    private static int prazoDias; // isso eh determinado pela propria biblioteca e pode ser atualizado se necessario
-
     public Livro(String nome, String genero, int idLivro){
         this.nome = nome;
         this.genero = genero;
@@ -38,14 +36,6 @@ public abstract class Livro {
     }
 
     public static int getPrazoDias() {
-        return prazoDias;
+        return 0;
     }
-
-
-    @Override
-    public String toString(){
-        String str = "";
-        return str;
-    }
-    
 }

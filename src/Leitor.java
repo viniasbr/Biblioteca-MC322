@@ -30,13 +30,4 @@ public abstract class Leitor {
     public void setTemAtraso(boolean temAtraso) {
         this.temAtraso = temAtraso;
     }
-    
-
-
-    @Override
-    public String toString(){
-        String str = "";
-        return str;
-    }
-    
 }

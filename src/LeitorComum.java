@@ -3,12 +3,10 @@ import java.util.Random;
 
 public class LeitorComum extends Leitor {
     private static int limite_livros = 5;
-    private ArrayList<LivroTradicional> listaLivrosTradLeitor;
 
 
     public LeitorComum(String nome, int idLeitor){
         super(nome, idLeitor);
-        listaLivrosTradLeitor = new ArrayList<LivroTradicional> ();
     }
 
     public static int getLimite_livros() {
@@ -17,14 +15,6 @@ public class LeitorComum extends Leitor {
 
     public static void setLimite_livros(int limite_livros) {
         LeitorComum.limite_livros = limite_livros;
-    }
-
-    public ArrayList<LivroTradicional> getListaLivrosTradLeitor() {
-        return listaLivrosTradLeitor;
-    }
-
-    public void setListaLivrosTrad(ArrayList<LivroTradicional> listaLivrosTradLeitor) {
-        this.listaLivrosTradLeitor = listaLivrosTradLeitor;
     }
 
     // id do leitor comum eh sempre par
@@ -38,12 +28,5 @@ public class LeitorComum extends Leitor {
         
         return id_gerado;
         
-    }
-
-
-    @Override
-    public String toString(){
-        String str = "";
-        return str;
     }
 }

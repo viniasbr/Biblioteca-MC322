@@ -28,12 +28,4 @@ public class LivroTradicional extends Livro {
         
         return id_gerado;
     }
-
-    @Override
-    public String toString(){
-        String str = "";
-        return str;
-    }
-
-    
 }
