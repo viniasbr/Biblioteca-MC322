@@ -18,7 +18,7 @@ public class LivroTradicional extends Livro {
     }
 
     // id do livro tradicional eh sempre par
-    protected static int GeraIdLivroTradicional() {
+    protected static int geraIdLivroTradicional() {
         Random random = new Random();
         
         int id_gerado = random.nextInt(100000);

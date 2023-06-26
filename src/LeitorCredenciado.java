@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Random;
 
 public class LeitorCredenciado extends Leitor {
@@ -18,7 +17,7 @@ public class LeitorCredenciado extends Leitor {
     }
 
     // id do leitor credenciado eh sempre impar
-    protected static int GeraIdLeitorCred() {
+    protected static int geraIdLeitorCred() {
         Random random = new Random();
         
         int id_gerado = random.nextInt(100000);

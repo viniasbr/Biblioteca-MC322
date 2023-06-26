@@ -18,7 +18,7 @@ public class LivroRaro extends Livro {
     }
 
     // id do livro raro eh sempre impar
-    protected static int GeraIdLivroRaro() {
+    protected static int geraIdLivroRaro() {
         Random random = new Random();
         
         int id_gerado = random.nextInt(100000);
