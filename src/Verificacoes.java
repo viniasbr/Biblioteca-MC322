@@ -1,6 +1,4 @@
 import java.time.format.DateTimeFormatter;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.time.LocalDate;
 
 class Verificacoes {
@@ -9,18 +7,11 @@ class Verificacoes {
     
     // verificar se o nome do usuario eh valido
     protected static boolean verificaUsuario(String usuario){
-        if(usuario.matches(".*\\s.*")){
-            return false;
+        String usuarioLimpo = usuario.trim().replaceAll("[^0-9[^A-Z][^ ][^a-z]]","");
+        if(usuarioLimpo.trim().equals(usuario.trim())) {
+            return true;
         }
-
-        Pattern special = Pattern.compile ("[!@#$%&*()+=|<>?{}\\[\\]~-]");
-        Matcher hasSpecial = special.matcher(usuario);
-        
-        if(hasSpecial.find()){
-            return false;
-        }
-
-        return true;
+        return false;
     }
     
     protected static boolean verificaLocalDate(String data){
