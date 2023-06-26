@@ -4,101 +4,95 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class Biblioteca {
-    private final String usuarioBibli;
-    private ArrayList<LivroTradicional> listaLivrosTrad;
-    private ArrayList<LivroRaro> listaLivrosRaros;
-    private ArrayList<LeitorComum> listaLeitoresCom;
-    private ArrayList<LeitorCredenciado> listaLeitoresCred;
-    private ArrayList<Emprestimo> listaEmprestimos;
-    private LocalDate diaHoje;
-
+public abstract class Biblioteca {
+    private static String usuarioBibli;
+    private static ArrayList<LivroTradicional> listaLivrosTrad = new ArrayList<>();
+    private static ArrayList<LivroRaro> listaLivrosRaros = new ArrayList<>();
+    private static ArrayList<LeitorComum> listaLeitoresCom = new ArrayList<>();
+    private static ArrayList<LeitorCredenciado> listaLeitoresCred = new ArrayList<>();
+    private static ArrayList<Emprestimo> listaEmprestimos = new ArrayList<>();
+    private static LocalDate diaHoje = LocalDate.now();
     public static Scanner read = new Scanner(System.in);
 
-    public Biblioteca(String usuarioBibli){
-        this.usuarioBibli = usuarioBibli;
-        this.listaLeitoresCred = new ArrayList<>();
-        this.listaLeitoresCom = new ArrayList<>();
-        this.listaLivrosTrad = new ArrayList<>();
-        this.listaLivrosRaros = new ArrayList<>();
-        this.listaEmprestimos = new ArrayList<>();
-        this.diaHoje = LocalDate.now();
-    }
 
     // getters e setters
-    public String getUsuarioBibli() {
+    public static void setUsuarioBibli(String usuario){
+        usuarioBibli = usuario;
+    }
+
+    public static String getUsuarioBibli() {
         return usuarioBibli;
     }
 
-    public ArrayList<LivroTradicional> getListaLivrosTrad() {
+    public static ArrayList<LivroTradicional> getListaLivrosTrad() {
         return listaLivrosTrad;
     }
 
-    public void setListaLivrosTrad(ArrayList<LivroTradicional> listaLivrosTrad) {
-        this.listaLivrosTrad = listaLivrosTrad;
+    public static void setListaLivrosTrad(ArrayList<LivroTradicional> lista) {
+        listaLivrosTrad = lista;
     }
 
-    public ArrayList<LivroRaro> getListaLivrosRaros() {
+    public static ArrayList<LivroRaro> getListaLivrosRaros() {
         return listaLivrosRaros;
     }
 
-    public void setListaLivrosRaros(ArrayList<LivroRaro> listaLivrosRaros) {
-        this.listaLivrosRaros = listaLivrosRaros;
+    public static void setListaLivrosRaros(ArrayList<LivroRaro> lista) {
+        listaLivrosRaros = lista;
     }
 
-    public ArrayList<LeitorComum> getListaLeitoresCom() {
+    public static ArrayList<LeitorComum> getListaLeitoresCom() {
         return listaLeitoresCom;
     }
 
-    public void setListaLeitoresCom(ArrayList<LeitorComum> listaLeitoresCom) {
-        this.listaLeitoresCom = listaLeitoresCom;
+    public static void setListaLeitoresCom(ArrayList<LeitorComum> lista) {
+        listaLeitoresCom = lista;
     }
 
-    public ArrayList<LeitorCredenciado> getListaLeitoresCred() {
+    public static ArrayList<LeitorCredenciado> getListaLeitoresCred() {
         return listaLeitoresCred;
     }
 
-    public void setListaLeitoresCred(ArrayList<LeitorCredenciado> listaLeitoresCred) {
-        this.listaLeitoresCred = listaLeitoresCred;
+    public static void setListaLeitoresCred(ArrayList<LeitorCredenciado> lista) {
+        listaLeitoresCred = lista;
     }
 
-    public LocalDate getDiaHoje() {
+    public static LocalDate getDiaHoje() {
         return diaHoje;
     }
 
-    public void setDiaHoje(LocalDate diaHoje) {
-        this.diaHoje = diaHoje;
+    public static void setDiaHoje(LocalDate dia) {
+        diaHoje = dia;
     }
 
-    public ArrayList<Emprestimo> getListaLocacoes() {
+    public static ArrayList<Emprestimo> getListaLocacoes() {
         return listaEmprestimos;
     }
 
-    public void setListaLocacoes(ArrayList<Emprestimo> listaLocacoes) {
-        this.listaEmprestimos = listaLocacoes;
+    public static void setListaEmprestimos(ArrayList<Emprestimo> lista) {
+        listaEmprestimos = lista;
     }
     
     // operacao com arquivos 
-    protected void salvarListaLeitor(){
+    public static void salvarListaLeitor(){
 
     }
 
     // operacao com arquivos 
-    protected void salverListaLivro(){
+    public static void salverListaLivro(){
 
     }
 
     // operacao com arquivos 
-    protected boolean lerListaLeitor(){
+    public static boolean lerListaLeitor(){
         return false;
     }
 
     // operacao com arquivos 
-    protected boolean lerListaLivro(){
+    public static boolean lerListaLivro(){
         return false;
     }
 
-    protected void cadastrarLeitor(String tipo){
+    public static void cadastrarLeitor(String tipo){
         // leitor credenciado
         if(tipo.equalsIgnoreCase("CR")){
             System.out.println("Digite o nome do leitor:");
@@ -152,7 +146,7 @@ public class Biblioteca {
         
     }
 
-    protected void cadastrarLivro(String tipo){
+    public static void cadastrarLivro(String tipo){
         // livro a ser cadastrado eh raro
         if(tipo.equals("RA")){
             System.out.println("Digite o nome da obra rara: ");
@@ -182,7 +176,7 @@ public class Biblioteca {
 
     }
 
-    protected boolean emprestarLivro(int idLivro, int idLeitor){ 
+    public static boolean emprestarLivro(int idLivro, int idLeitor){
         // percorrer lista de leitores comuns
         Leitor leitor = null;
         Livro livro = null;
@@ -276,7 +270,7 @@ public class Biblioteca {
     // mudar o livro pra nao usado
     // tirar do emprestimo da lista de emprestimos
 
-    protected boolean devolverLivro(int idLivro){
+    public static boolean devolverLivro(int idLivro){
         for(Emprestimo emp : listaEmprestimos){
             // achou o livro
             LocalDate dataEntrega = emp.getDataEntrega();
@@ -296,7 +290,7 @@ public class Biblioteca {
     }
 
     // operacao com arquivos
-    protected String listarLeitores(){
+    public static String listarLeitores(){
         return null;
     }
 }
