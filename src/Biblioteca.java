@@ -98,13 +98,13 @@ public class Biblioteca {
         return false;
     }
 
-    protected void CadastrarLeitor(String tipo){
+    protected void cadastrarLeitor(String tipo){
         // leitor credenciado
         if(tipo.equalsIgnoreCase("CR")){
             System.out.println("Digite o nome do leitor:");
             String nome_cr = read.nextLine();
             boolean id_novo = false;
-            int idLeitorCred = LeitorCredenciado.GeraIdLeitorCred();
+            int idLeitorCred = LeitorCredenciado.geraIdLeitorCred();
             while(!id_novo){
                 boolean encontrou = false;
                 for(LeitorCredenciado l : listaLeitoresCred){
@@ -116,7 +116,7 @@ public class Biblioteca {
                 if(!encontrou)
                     id_novo = true;
                 else
-                    idLeitorCred = LeitorCredenciado.GeraIdLeitorCred();
+                    idLeitorCred = LeitorCredenciado.geraIdLeitorCred();
             }
             LeitorCredenciado leitorCred = new LeitorCredenciado(nome_cr, idLeitorCred);
             listaLeitoresCred.add(leitorCred);
@@ -127,7 +127,7 @@ public class Biblioteca {
             System.out.println("Digite o nome do leitor:");
             String nome_co = read.nextLine();
             boolean id_novo = false;
-            int idLeitorComum = LeitorComum.GeraIdLeitorComum();
+            int idLeitorComum = LeitorComum.geraIdLeitorComum();
             while(!id_novo){
                 boolean encontrou = false;
                 for(LeitorComum l : listaLeitoresCom){
@@ -139,7 +139,7 @@ public class Biblioteca {
                 if(!encontrou)
                     id_novo = true;
                 else
-                    idLeitorComum = LeitorComum.GeraIdLeitorComum();
+                    idLeitorComum = LeitorComum.geraIdLeitorComum();
             }
             LeitorComum leitorComum = new LeitorComum(nome_co, idLeitorComum);
             listaLeitoresCom.add(leitorComum);
@@ -152,14 +152,14 @@ public class Biblioteca {
         
     }
 
-    protected void CadastrarLivro(String tipo){
+    protected void cadastrarLivro(String tipo){
         // livro a ser cadastrado eh raro
         if(tipo.equals("RA")){
             System.out.println("Digite o nome da obra rara: ");
             String nome_raro = read.nextLine();
             System.out.println("Digite o genero da obra rara: ");
             String genero_raro = read.nextLine();
-            int id_raro = LivroRaro.GeraIdLivroRaro();
+            int id_raro = LivroRaro.geraIdLivroRaro();
             LivroRaro livro_raro = new LivroRaro(nome_raro, genero_raro, id_raro);
             listaLivrosRaros.add(livro_raro);
         }
@@ -170,7 +170,7 @@ public class Biblioteca {
             String nome_tradicional = read.nextLine();
             System.out.println("Digite o genero da obra tradicional: ");
             String genero_tradicional = read.nextLine();
-            int id_tradicional = LivroTradicional.GeraIdLivroTradicional();
+            int id_tradicional = LivroTradicional.geraIdLivroTradicional();
             LivroTradicional livro_tradicional = new LivroTradicional(nome_tradicional, genero_tradicional, id_tradicional);
             listaLivrosTrad.add(livro_tradicional);
         }

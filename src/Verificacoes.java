@@ -1,15 +1,26 @@
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.time.LocalDate;
 
 class Verificacoes {
 
     public static DateTimeFormatter formatadorData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    
     // verificar se o nome do usuario eh valido
     protected static boolean verificaUsuario(String usuario){
         if(usuario.matches(".*\\s.*")){
             return false;
         }
-            return true;
+
+        Pattern special = Pattern.compile ("[!@#$%&*()+=|<>?{}\\[\\]~-]");
+        Matcher hasSpecial = special.matcher(usuario);
+        
+        if(hasSpecial.find()){
+            return false;
+        }
+
+        return true;
     }
     
     protected static boolean verificaLocalDate(String data){

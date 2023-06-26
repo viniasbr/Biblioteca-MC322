@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Random;
 
 public class LeitorComum extends Leitor {
@@ -18,7 +17,7 @@ public class LeitorComum extends Leitor {
     }
 
     // id do leitor comum eh sempre par
-    protected static int GeraIdLeitorComum() {
+    protected static int geraIdLeitorComum() {
         Random random = new Random();
         
         int id_gerado = random.nextInt(100000);
