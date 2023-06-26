@@ -7,7 +7,7 @@ class Verificacoes {
     
     // verificar se o nome do usuario eh valido
     protected static boolean verificaUsuario(String usuario){
-        String usuarioLimpo = usuario.trim().replaceAll("[^0-9[^A-Z][^ ][^a-z]]","");
+        String usuarioLimpo = usuario.trim().replaceAll("[^0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_]","");
         if(usuarioLimpo.trim().equals(usuario.trim())) {
             return true;
         }
