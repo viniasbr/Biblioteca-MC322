@@ -328,6 +328,55 @@ public abstract class Biblioteca {
 
 
     public static String listarLeitores(){
-        return null;
+        String saida = "";
+        saida += "Leitores Comuns:\n\n";
+        for(Leitor l: listaLeitoresCom){
+            saida += l.getNome() + ", ID "+l.getIdLeitor();
+            if(l.isTemAtraso()){
+                saida+= ", POSSUI ATRASO";
+            }
+            saida+= "\n";
+        }
+        saida += "\nLeitores Credenciados:\n\n";
+        for(Leitor l: listaLeitoresCred){
+            saida += l.getNome() + ", ID "+l.getIdLeitor();
+            if(l.isTemAtraso()){
+                saida+= ", POSSUI ATRASO";
+            }
+            saida+= "\n";
+        }
+        return saida;
+    }
+    public static String listarLivros(){
+        String saida = "";
+        saida += "Livros Comuns:\n\n";
+        for(Livro l: listaLivrosTrad){
+            saida += l.getNome() + ", Gênero: " +l.getGenero() + ", ID "+l.getIdLivro();
+            if(l.isEmUso()){
+                saida+= ", EMPRESTADO";
+            }
+            saida+= "\n";
+        }
+        saida += "\nLivros Raros:\n\n";
+        for(Livro l: listaLivrosRaros){
+            saida += l.getNome() + ", Gênero: " +l.getGenero() + ", ID "+l.getIdLivro();
+            if(l.isEmUso()){
+                saida+= ", EMPRESTADO";
+            }
+            saida+= "\n";
+        }
+        return saida;
+    }
+    public static String listarEmprestimos(){
+        String saida = "";
+        saida += "Empréstimos:\n\n";
+        for(Emprestimo e: listaEmprestimos){
+            saida+= "Livro: " + e.getLivro().getNome() +", Gênero: "+e.getLivro().getGenero() +", ID " + e.getLivro().getIdLivro() +"; Leitor: "+e.getLeitor().getNome() + ", ID " +e.getLeitor().getIdLeitor() +"; Prazo: " + e.getDataEntrega().format(Verificacoes.formatadorData);
+            if(e.getDataEntrega().isBefore(diaHoje)){
+                saida += ", ATRASADO";
+            }
+            saida += "\n";
+        }
+        return saida;
     }
 }
