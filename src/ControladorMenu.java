@@ -39,6 +39,12 @@ public class ControladorMenu {
     private TextField caixaIDLivro;
     @FXML
     private TextField caixaIDLeitor;
+    @FXML
+    private TextArea areaListarLeitor;
+    @FXML
+    private TextArea areaListarLivros;
+    @FXML
+    private TextArea areaListarEmprestimos;
 
     public void irParaMenuInicial(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("Menu Inicial.fxml"));
@@ -84,6 +90,27 @@ public class ControladorMenu {
     }
     public void irParaEmprestarLivro(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("Menu Empréstimo.fxml"));
+        stage = (Stage)borderPane.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void irPararListarLeitores(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Menu Listar Clientes.fxml"));
+        stage = (Stage)borderPane.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void irPararListarLivros(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Menu Listar Livros.fxml"));
+        stage = (Stage)borderPane.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void irPararListarEmprestimos(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Menu Listar Emprestimos.fxml"));
         stage = (Stage)borderPane.getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -204,5 +231,13 @@ public class ControladorMenu {
             aviso.showAndWait();
         }
     }
-
+    public void botaoListarLeitores(ActionEvent event){
+        areaListarLeitor.setText("O rato\nroeu\na roupa\ndo rei\nde roma");//Aqui deve estar o metodo de listar leitores
+    }
+    public void botaoListarLivros(ActionEvent event){
+        areaListarLivros.setText("O rato\nroeu\na roupa\ndo rei\nde roma");//Aqui deve estar o metodo de listar livros
+    }
+    public void botaoListarEmprestimos(ActionEvent event){
+        areaListarEmprestimos.setText("O rato\nroeu\na roupa\ndo rei\nde roma");//Aqui deve estar o metodo de listar emprestimos
+    }
 }
