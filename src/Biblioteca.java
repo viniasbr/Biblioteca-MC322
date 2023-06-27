@@ -4,6 +4,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
+import java.io.*;
 
 
 public abstract class Biblioteca {
@@ -96,13 +97,13 @@ public abstract class Biblioteca {
     
     // operacao com arquivos 
     public static boolean lerListaLeitor(){
-        // File arquivoLeitores = new File("dados/"+ usuarioBibli + "-leitores.txt");
-        // if(arquivoLeitores.canRead()){
-        //     //String valores = 
-        // }
-        // else{
-        //     return false;
-        // }
+        //File arquivoLeitores = new File("dados/"+ usuarioBibli + "-leitores.txt");
+        String arquivoLeitores = "dados/"+ usuarioBibli + "-leitores.txt";
+
+        try{
+            BufferedReader in = new Bu
+        }
+
         return false;
         
     }
