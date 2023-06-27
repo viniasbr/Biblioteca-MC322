@@ -1,7 +1,9 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 
 public abstract class Biblioteca {
@@ -71,26 +73,68 @@ public abstract class Biblioteca {
     public static void setListaEmprestimos(ArrayList<Emprestimo> lista) {
         listaEmprestimos = lista;
     }
+
+    public static int arquivosExistem(){
+        File arquivoLeitores = new File("dados/"+ usuarioBibli + "-leitores.txt");
+        File arquivoLivros = new File("dados/"+ usuarioBibli + "-livros.txt");
+        File arquivoEmprestimos = new File("dados/"+ usuarioBibli + "-emprestimos.txt");
+
+        // os 3 arquivos existem
+        if(arquivoLeitores.exists() && arquivoLivros.exists() && arquivoEmprestimos.exists()){
+            return 1;
+        }
+        // nenhum dos 3 arquivos existe
+        else if(!(arquivoLeitores.exists()) && !(arquivoLivros.exists()) && !(arquivoEmprestimos.exists())){
+            return 0;
+        }
+        // 1 existe e dois nao; ou 2 existem e 1 nao
+        else{   // arquivo corrompido ou algo do tipo
+            return -1;
+        }
+        
+    }
     
     // operacao com arquivos 
-    public static void salvarListaLeitor(){
-
-    }
-
-    // operacao com arquivos 
-    public static void salverListaLivro(){
-
-    }
-
-    // operacao com arquivos 
     public static boolean lerListaLeitor(){
+        // File arquivoLeitores = new File("dados/"+ usuarioBibli + "-leitores.txt");
+        // if(arquivoLeitores.canRead()){
+        //     //String valores = 
+        // }
+        // else{
+        //     return false;
+        // }
         return false;
+        
     }
 
     // operacao com arquivos 
     public static boolean lerListaLivro(){
         return false;
     }
+
+    // operacao com arquivos 
+    public static boolean lerListaEmprestimo(){
+        return false;
+    }
+
+    // operacao com arquivos 
+    public static void salvarListas(){ // salvarListaLeitor, salvarListaLivro, salvarListaEmprestimo
+        // os 3 arquivos existem: basta ler e jogar na memoria
+        if(arquivosExistem() == 1){
+            
+        }
+        // nenhum dos 3 arquivos existe: criar os 3
+        else if(arquivosExistem() == 0){
+
+        }
+        // 1 existe e dois nao; ou 2 existem e 1 nao: apagar os existentes e criar os 3
+        else{
+
+        }
+        File arquivoLeitores = new File("dados/"+ usuarioBibli + "-leitores.txt");
+
+    }
+
 
     public static void cadastrarLeitor(String tipo){
         // leitor credenciado
@@ -146,34 +190,26 @@ public abstract class Biblioteca {
         
     }
 
-    public static void cadastrarLivro(String tipo){
+    public static void cadastrarLivro(String tipo, String nome, String genero){
         // livro a ser cadastrado eh raro
         if(tipo.equals("RA")){
-            System.out.println("Digite o nome da obra rara: ");
-            String nome_raro = read.nextLine();
-            System.out.println("Digite o genero da obra rara: ");
-            String genero_raro = read.nextLine();
             int id_raro = LivroRaro.geraIdLivroRaro();
-            LivroRaro livro_raro = new LivroRaro(nome_raro, genero_raro, id_raro);
+            LivroRaro livro_raro = new LivroRaro(nome, genero, id_raro);
             listaLivrosRaros.add(livro_raro);
         }
-
+ 
         // livro a ser cadastrado eh tradicional
         else if(tipo.equals("TR")){
-            System.out.println("Digite o nome da obra tradicional: ");
-            String nome_tradicional = read.nextLine();
-            System.out.println("Digite o genero da obra tradicional: ");
-            String genero_tradicional = read.nextLine();
             int id_tradicional = LivroTradicional.geraIdLivroTradicional();
-            LivroTradicional livro_tradicional = new LivroTradicional(nome_tradicional, genero_tradicional, id_tradicional);
+            LivroTradicional livro_tradicional = new LivroTradicional(nome, genero, id_tradicional);
             listaLivrosTrad.add(livro_tradicional);
         }
-
+ 
         else{
             System.out.println("Tipo digitado nao eh valido!");
             return;
         }
-
+ 
     }
 
     public static boolean emprestarLivro(int idLivro, int idLeitor){
@@ -188,7 +224,7 @@ public abstract class Biblioteca {
                 }
             }
         }
-
+ 
         // percorrer lista de leitores credenciados
         else{
             for(LeitorCredenciado l : listaLeitoresCred){
@@ -197,7 +233,7 @@ public abstract class Biblioteca {
                 }
             }
         }
-
+ 
         // percorrer lista de livros tradicionais
         if(idLivro%2==0){
             prazoEntrega = diaHoje.plus(LivroTradicional.getPrazoDias(),ChronoUnit.DAYS);
@@ -207,7 +243,7 @@ public abstract class Biblioteca {
                 }
             }
         }
-
+ 
         // percorrer lista de livros raros
         else{
             prazoEntrega = diaHoje.plus(LivroRaro.getPrazoDias(),ChronoUnit.DAYS);
@@ -217,19 +253,19 @@ public abstract class Biblioteca {
                 }
             }
         }
-
+ 
         // nao achou leitor ou livro pelo id
         if(livro == null || leitor == null)
             return false;
-
+ 
         // nao pode pegar um livro que esta em uso
         if(livro.isEmUso())
             return false;
-
+ 
         // se o leitor tem algum atraso, nao pode pegar o livro
         if(leitor.isTemAtraso())
             return false;
-
+ 
         // verificar se o leitor comum vai passar do limite de livros dele
         if(leitor instanceof LeitorComum){
             int qntLivrosLeitorComum = 0;
@@ -239,7 +275,7 @@ public abstract class Biblioteca {
             if(qntLivrosLeitorComum==LeitorComum.getLimite_livros())
                 return false;
         }
-
+ 
         // verificar se o leitor cred vai passar do limite de livros dele
         if(leitor instanceof LeitorCredenciado){
             int qntLivrosLeitorCred = 0;
@@ -249,15 +285,15 @@ public abstract class Biblioteca {
             if(qntLivrosLeitorCred==LeitorCredenciado.getLimite_livros())
                 return false;
         }
-
+ 
         // verificar se o leitor pode pegar o livro pelo tipo dele
         if((livro instanceof LivroRaro) && (leitor instanceof LeitorComum))
             return false;
-
+ 
         // criar uma instancia emprestimo e add na lista de emprestimos
         Emprestimo emprestimo = new Emprestimo(leitor, livro, prazoEntrega);
         listaEmprestimos.add(emprestimo);
-
+ 
         return true;
     }
 
@@ -289,7 +325,7 @@ public abstract class Biblioteca {
         return false;
     }
 
-    // operacao com arquivos
+
     public static String listarLeitores(){
         return null;
     }
