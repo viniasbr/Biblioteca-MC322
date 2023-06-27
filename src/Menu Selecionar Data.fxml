@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="127.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControladorMenu">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Arquivos">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Salvar Dados" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Salvar Dados e Sair" />
+                  <MenuItem mnemonicParsing="false" text="Sair Sem Salvar" />
+               </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Listar">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Leitores" />
+                <MenuItem mnemonicParsing="false" text="Livros" />
+                  <MenuItem mnemonicParsing="false" text="Empréstimos" />
+               </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Cadastrar">
+               <items>
+                  <Menu mnemonicParsing="false" text="Cliente">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Cadastrar Cliente Comum" />
+                      <MenuItem mnemonicParsing="false" text="Cadastrar Cliente Credenciado" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Livro">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Cadastrar Livro Comum" />
+                        <MenuItem mnemonicParsing="false" text="Cadastrar Livro Raro" />
+                    </items>
+                  </Menu>
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Empréstimo">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Emprestar Livro Comum" />
+                  <MenuItem mnemonicParsing="false" text="Emprestar Livro Raro" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Devolução">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Devolver Livro" />
+                  <MenuItem mnemonicParsing="false" text="Verificar Atraso" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Data de Hoje">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#irParaSelecionarData" text="Especificar Data" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#usarDataDoSistema" text="Usar Data do Sistema" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <DatePicker fx:id="datePicker" layoutX="126.0" layoutY="40.0" onAction="#escolherDataDatePicker" prefHeight="26.0" prefWidth="215.0" />
+            <Text layoutX="126.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selecione uma data para o sistema:" />
+            <Button layoutX="362.0" layoutY="40.0" mnemonicParsing="false" onAction="#confirmarDataEscolhida" text="Confirmar Data" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
