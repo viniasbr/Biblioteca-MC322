@@ -4,13 +4,14 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="143.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControladorMenu">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControladorMenu">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -47,12 +48,12 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Empréstimo">
                <items>
-                   <MenuItem mnemonicParsing="false" onAction="#irParaEmprestarLivro" text="Emprestar Livro" />
+                  <MenuItem mnemonicParsing="false" onAction="#irParaEmprestarLivro" text="Emprestar Livro" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Devolução">
                <items>
-                   <MenuItem mnemonicParsing="false" onAction="#irParaDevolucao" text="Devolver Livro" />
+                  <MenuItem mnemonicParsing="false" onAction="#irParaDevolucao" text="Devolver Livro" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Data de Hoje">
@@ -65,12 +66,16 @@
       </MenuBar>
    </top>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Text layoutX="42.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insira o nome do cliente comum a ser cadastrado:" />
-            <TextField fx:id="caixaNomeClienteComum" layoutX="42.0" layoutY="43.0" prefHeight="26.0" prefWidth="306.0" promptText="Nome Completo" />
-            <Button layoutX="383.0" layoutY="43.0" mnemonicParsing="false" onAction="#botaoCadastrarClienteComum" text="Cadastrar Cliente Comum" />
-         </children>
-      </AnchorPane>
+      <TextArea fx:id="areaListarEmprestimosDevolucao" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
+   <bottom>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <Button mnemonicParsing="false" onAction="#botaoListarEmprestimosDevolucao" text="Listar Empréstimos" />
+            <Separator orientation="VERTICAL" prefHeight="30.0" prefWidth="50.0" />
+            <TextField fx:id="caixaDevolucao" layoutX="100.0" prefHeight="26.0" prefWidth="204.0" promptText="ID do Livro a Ser Devolvido" />
+            <Button mnemonicParsing="false" onAction="#botaoDevolverLivro" prefHeight="26.0" prefWidth="179.0" text="Confirmar Devolução" />
+        </items>
+      </ToolBar>
+   </bottom>
 </BorderPane>

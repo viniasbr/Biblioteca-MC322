@@ -45,6 +45,10 @@ public class ControladorMenu {
     private TextArea areaListarLivros;
     @FXML
     private TextArea areaListarEmprestimos;
+    @FXML
+    private TextArea areaListarEmprestimosDevolucao;
+    @FXML
+    private TextField caixaDevolucao;
 
     public void irParaMenuInicial(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("Menu Inicial.fxml"));
@@ -111,6 +115,13 @@ public class ControladorMenu {
     }
     public void irPararListarEmprestimos(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("Menu Listar Emprestimos.fxml"));
+        stage = (Stage)borderPane.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void irParaDevolucao(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Menu Devolução.fxml"));
         stage = (Stage)borderPane.getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -197,6 +208,34 @@ public class ControladorMenu {
         }
 
     }
+    public void botaoDevolverLivro(ActionEvent event){
+        String idLivro = caixaDevolucao.getText();
+        if(!Verificacoes.verificaInt(idLivro)){
+            Alert erro = new Alert(Alert.AlertType.ERROR);
+            erro.setTitle("Erro ao Realizar Devolução");
+            erro.setHeaderText("A devolução falhou.");
+            erro.setContentText("Insira um ID válidos.");
+            erro.showAndWait();
+        }
+        else{
+            int idLivroInt = Integer.parseInt(idLivro);
+            if(!Biblioteca.devolverLivro(idLivroInt)){
+                Alert erro = new Alert(Alert.AlertType.ERROR);
+                erro.setTitle("Erro ao Realizar Devolução");
+                erro.setHeaderText("A devolução falhou falhou.");
+                erro.setContentText("Insira um ID de livro que consta na lista de empréstimos.");
+                erro.showAndWait();
+            }
+            else{
+                Alert aviso = new Alert(Alert.AlertType.INFORMATION);
+                aviso.setTitle("Devolução Realizada");
+                aviso.setHeaderText("A devolução foi realizada com sucesso.");
+                aviso.setContentText("O livro foi removido da lista de empréstimos e pode ser emprestado novamente.");
+                aviso.showAndWait();
+            }
+        }
+
+    }
     public void botaoConfirmarLivroComum(ActionEvent event){
         String titulo = caixaTituloLivroComum.getText().trim();
         String genero = caixaGeneroLivroComum.getText().trim();
@@ -239,5 +278,8 @@ public class ControladorMenu {
     }
     public void botaoListarEmprestimos(ActionEvent event){
         areaListarEmprestimos.setText("O rato\nroeu\na roupa\ndo rei\nde roma");//Aqui deve estar o metodo de listar emprestimos
+    }
+    public void botaoListarEmprestimosDevolucao(ActionEvent event){
+        areaListarEmprestimosDevolucao.setText("O rato\nroeu\na roupa\ndo rei\nde roma");//Aqui deve estar o metodo de listar emprestimos
     }
 }

@@ -51,9 +51,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Devolução">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Devolver Livro" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Verificar Atraso" />
+                   <MenuItem mnemonicParsing="false" onAction="#irParaDevolucao" text="Devolver Livro" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Data de Hoje">

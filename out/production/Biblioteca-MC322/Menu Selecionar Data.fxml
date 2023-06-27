@@ -52,14 +52,14 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Devolução">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Devolver Livro" />
+                   <MenuItem mnemonicParsing="false" onAction="#irParaDevolucao" text="Devolver Livro" />
+                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Verificar Atraso" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Data de Hoje">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#irParaSelecionarData" text="Especificar Data" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#usarDataDoSistema" text="Usar Data do Sistema" />
                </items>
             </Menu>
