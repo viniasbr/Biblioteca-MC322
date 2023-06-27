@@ -33,14 +33,14 @@
                <items>
                   <Menu mnemonicParsing="false" text="Cliente">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Cadastrar Cliente Comum" />
-                      <MenuItem mnemonicParsing="false" text="Cadastrar Cliente Credenciado" />
+                        <MenuItem mnemonicParsing="false" onAction="#irParaCadastrarClienteComum" text="Cadastrar Cliente Comum" />
+                      <MenuItem mnemonicParsing="false" onAction="#irParaCadastrarClienteCredenciado" text="Cadastrar Cliente Credenciado" />
                     </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Livro">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Cadastrar Livro Comum" />
-                        <MenuItem mnemonicParsing="false" text="Cadastrar Livro Raro" />
+                      <MenuItem mnemonicParsing="false" onAction="#irParaCadastrarLivroComum" text="Cadastrar Livro Comum" />
+                        <MenuItem mnemonicParsing="false" onAction="#irParaCadastrarLivroRaro" text="Cadastrar Livro Raro" />
                     </items>
                   </Menu>
                </items>

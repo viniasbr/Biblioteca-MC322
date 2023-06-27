@@ -92,11 +92,9 @@ public abstract class Biblioteca {
         return false;
     }
 
-    public static void cadastrarLeitor(String tipo){
+    public static void cadastrarLeitor(String tipo, String nome_cr){
         // leitor credenciado
         if(tipo.equalsIgnoreCase("CR")){
-            System.out.println("Digite o nome do leitor:");
-            String nome_cr = read.nextLine();
             boolean id_novo = false;
             int idLeitorCred = LeitorCredenciado.geraIdLeitorCred();
             while(!id_novo){
@@ -146,26 +144,18 @@ public abstract class Biblioteca {
         
     }
 
-    public static void cadastrarLivro(String tipo){
+    public static void cadastrarLivro(String tipo, String nome, String genero){
         // livro a ser cadastrado eh raro
         if(tipo.equals("RA")){
-            System.out.println("Digite o nome da obra rara: ");
-            String nome_raro = read.nextLine();
-            System.out.println("Digite o genero da obra rara: ");
-            String genero_raro = read.nextLine();
             int id_raro = LivroRaro.geraIdLivroRaro();
-            LivroRaro livro_raro = new LivroRaro(nome_raro, genero_raro, id_raro);
+            LivroRaro livro_raro = new LivroRaro(nome, genero, id_raro);
             listaLivrosRaros.add(livro_raro);
         }
 
         // livro a ser cadastrado eh tradicional
         else if(tipo.equals("TR")){
-            System.out.println("Digite o nome da obra tradicional: ");
-            String nome_tradicional = read.nextLine();
-            System.out.println("Digite o genero da obra tradicional: ");
-            String genero_tradicional = read.nextLine();
             int id_tradicional = LivroTradicional.geraIdLivroTradicional();
-            LivroTradicional livro_tradicional = new LivroTradicional(nome_tradicional, genero_tradicional, id_tradicional);
+            LivroTradicional livro_tradicional = new LivroTradicional(nome, genero, id_tradicional);
             listaLivrosTrad.add(livro_tradicional);
         }
 
