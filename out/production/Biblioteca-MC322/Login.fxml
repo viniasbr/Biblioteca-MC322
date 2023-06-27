@@ -21,8 +21,11 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Button fx:id="botaoEntrar" layoutX="289.0" layoutY="188.0" mnemonicParsing="false" onAction="#entrar" text="Entrar" />
-      <Text layoutX="14.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*O username pode conter somente números, letras e &quot;_&quot;" />
+      <Button fx:id="botaoEntrar" layoutX="254.0" layoutY="186.0" mnemonicParsing="false" onAction="#entrar" prefHeight="30.0" prefWidth="120.0" text="Entrar">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Text layoutX="14.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*O username pode conter somente números, letras e &quot;_&quot;" />
       <Text layoutX="179.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BIBLIOTECAS" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="30.0" />

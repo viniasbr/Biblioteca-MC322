@@ -35,6 +35,10 @@ public class ControladorMenu {
     private TextField caixaTituloLivroRaro;
     @FXML
     private TextField caixaGeneroLivroRaro;
+    @FXML
+    private TextField caixaIDLivro;
+    @FXML
+    private TextField caixaIDLeitor;
 
     public void irParaMenuInicial(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("Menu Inicial.fxml"));
@@ -73,6 +77,13 @@ public class ControladorMenu {
     }
     public void irParaCadastrarLivroRaro(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("Menu Cadastrar Livro Raro.fxml"));
+        stage = (Stage)borderPane.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void irParaEmprestarLivro(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Menu Empréstimo.fxml"));
         stage = (Stage)borderPane.getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -128,6 +139,36 @@ public class ControladorMenu {
             aviso.setContentText("O cliente \"" + nome + "\" foi cadastrado como um cliente comum.");
             aviso.showAndWait();
         }
+    }
+    public void botaoEmprestarLivro(ActionEvent event){
+        String idLivro = caixaIDLivro.getText();
+        String idLeitor = caixaIDLeitor.getText();
+        if(!Verificacoes.verificaInt(idLivro) || !Verificacoes.verificaInt(idLeitor)){
+            Alert erro = new Alert(Alert.AlertType.ERROR);
+            erro.setTitle("Erro ao Realizar Empréstimo");
+            erro.setHeaderText("O empréstimo falhou.");
+            erro.setContentText("Insira IDs válidos.");
+            erro.showAndWait();
+        }
+        else{
+            int idLivroInt = Integer.parseInt(idLivro);
+            int idLeitorInt = Integer.parseInt(idLeitor);
+            if(!Biblioteca.emprestarLivro(idLivroInt,idLeitorInt)){
+                Alert erro = new Alert(Alert.AlertType.ERROR);
+                erro.setTitle("Erro ao Realizar Empréstimo");
+                erro.setHeaderText("O empréstimo falhou.");
+                erro.setContentText("Confira as condições de empréstimo.");
+                erro.showAndWait();
+            }
+            else{
+                Alert aviso = new Alert(Alert.AlertType.INFORMATION);
+                aviso.setTitle("Empréstimo Realizado");
+                aviso.setHeaderText("O empréstimo foi realizado com sucesso.");
+                aviso.setContentText("O livro foi registrado como emprestado para o referente cliente.");
+                aviso.showAndWait();
+            }
+        }
+
     }
     public void botaoConfirmarLivroComum(ActionEvent event){
         String titulo = caixaTituloLivroComum.getText().trim();

@@ -92,7 +92,7 @@ public abstract class Biblioteca {
         return false;
     }
 
-    public static void cadastrarLeitor(String tipo, String nome_cr){
+    public static void cadastrarLeitor(String tipo, String nome){
         // leitor credenciado
         if(tipo.equalsIgnoreCase("CR")){
             boolean id_novo = false;
@@ -110,14 +110,12 @@ public abstract class Biblioteca {
                 else
                     idLeitorCred = LeitorCredenciado.geraIdLeitorCred();
             }
-            LeitorCredenciado leitorCred = new LeitorCredenciado(nome_cr, idLeitorCred);
+            LeitorCredenciado leitorCred = new LeitorCredenciado(nome, idLeitorCred);
             listaLeitoresCred.add(leitorCred);
         }
 
         // leitor comum
         else if(tipo.equalsIgnoreCase("CO")){
-            System.out.println("Digite o nome do leitor:");
-            String nome_co = read.nextLine();
             boolean id_novo = false;
             int idLeitorComum = LeitorComum.geraIdLeitorComum();
             while(!id_novo){
@@ -133,7 +131,7 @@ public abstract class Biblioteca {
                 else
                     idLeitorComum = LeitorComum.geraIdLeitorComum();
             }
-            LeitorComum leitorComum = new LeitorComum(nome_co, idLeitorComum);
+            LeitorComum leitorComum = new LeitorComum(nome, idLeitorComum);
             listaLeitoresCom.add(leitorComum);
         }
 

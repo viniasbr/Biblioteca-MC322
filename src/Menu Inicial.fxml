@@ -48,8 +48,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Empréstimo">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Emprestar Livro Comum" />
-                  <MenuItem mnemonicParsing="false" text="Emprestar Livro Raro" />
+                   <MenuItem mnemonicParsing="false" onAction="#irParaEmprestarLivro" text="Emprestar Livro" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Devolução">

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControladorMenu">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControladorMenu">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -47,7 +47,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Empréstimo">
                <items>
-                   <MenuItem mnemonicParsing="false" onAction="#irParaEmprestarLivro" text="Emprestar Livro" />
+                  <MenuItem mnemonicParsing="false" onAction="#irParaEmprestarLivro" text="Emprestar Livro" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Devolução">
@@ -69,11 +69,20 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="105.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Título do livro comum a ser cadastrado:" />
-            <TextField fx:id="caixaTituloLivroComum" layoutX="104.0" layoutY="32.0" prefHeight="26.0" prefWidth="243.0" promptText="Título" />
-            <Text layoutX="104.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gênero do livro comum a ser cadastrado:" />
-            <TextField fx:id="caixaGeneroLivroComum" layoutX="104.0" layoutY="88.0" prefHeight="26.0" prefWidth="251.0" promptText="Gênero" />
-            <Button layoutX="390.0" layoutY="28.0" mnemonicParsing="false" onAction="#botaoConfirmarLivroComum" prefHeight="85.0" prefWidth="107.0" text="Cadastrar Livro" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
+            <Text layoutX="128.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insira o ID do cliente:" />
+            <TextField fx:id="caixaIDLeitor" layoutX="128.0" layoutY="122.0" promptText="ID do Cliente" />
+            <Text layoutX="128.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insira o ID do livro:" />
+            <TextField fx:id="caixaIDLivro" layoutX="128.0" layoutY="51.0" promptText="ID do Livro" />
+            <Button layoutX="349.0" layoutY="59.0" mnemonicParsing="false" onAction="#botaoEmprestarLivro" prefHeight="72.0" prefWidth="124.0" text="Realizar Empréstimo" textAlignment="CENTER" wrapText="true" />
+            <Text layoutX="65.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informações relevantes: " />
+            <Text layoutX="65.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- O ID do livro e o ID do cliente podem ser conferidos através do menu de Listar." />
+            <Text layoutX="65.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Um livro raro só pode ser emprestado a um leitor credenciado." />
+            <Text layoutX="65.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Um leitor credenciado tem ID ímpar, um leitor comum tem ID par." />
+            <Text layoutX="65.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Um livro raro tem ID ímpar, um livro comum tem ID par." />
+            <Text layoutX="59.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*Desconsiderar essas informações pode fazer com que o empréstimo falhe." />
+            <Text layoutX="65.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Um leitor comum possui um limite de 5 empréstimos simultâneos." />
+            <Text layoutX="66.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Um leitor credenciado possui um limite de 10 empréstimos simutâneos." />
+            <Text layoutX="65.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Um leitor não pode realizar novos empréstimos se estiver com algum atraso." />
          </children>
       </AnchorPane>
    </center>
