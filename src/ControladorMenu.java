@@ -255,20 +255,19 @@ public class ControladorMenu {
             aviso.showAndWait();
         }
     }
-    public void botaoConfirmarLivroRaro(ActionEvent event){
+    public void botaoConfirmarLivroRaro(ActionEvent event) {
         String titulo = caixaTituloLivroRaro.getText().trim();
         String genero = caixaGeneroLivroRaro.getText().trim();
         Alert confirmarNome = new Alert(Alert.AlertType.CONFIRMATION);
         confirmarNome.setTitle("Confirmar Cadastro de Livro");
         confirmarNome.setHeaderText("Confirmar cadastro do livro raro");
-        confirmarNome.setContentText("Aperte OK para confirmar o cadastro do livro raro \""+titulo+"\" de gênero \""+ genero+ "\"");
-        if(confirmarNome.showAndWait().get() == ButtonType.OK)
-        {
-            Biblioteca.cadastrarLivro("RA",titulo,genero);
+        confirmarNome.setContentText("Aperte OK para confirmar o cadastro do livro raro \"" + titulo + "\" de gênero \"" + genero + "\"");
+        if (confirmarNome.showAndWait().get() == ButtonType.OK) {
+            Biblioteca.cadastrarLivro("RA", titulo, genero);
             Alert aviso = new Alert(Alert.AlertType.INFORMATION);
             aviso.setTitle("Livro Raro Cadastrado");
             aviso.setHeaderText("O livro raro foi cadastrado");
-            aviso.setContentText("O livro \""+titulo+"\" de gênero \""+genero+"\" foi cadastrado como um livro raro.");
+            aviso.setContentText("O livro \"" + titulo + "\" de gênero \"" + genero + "\" foi cadastrado como um livro raro.");
             aviso.showAndWait();
         }
     }
@@ -283,5 +282,43 @@ public class ControladorMenu {
     }
     public void botaoListarEmprestimosDevolucao(ActionEvent event){
         areaListarEmprestimosDevolucao.setText(Biblioteca.listarEmprestimos());//Aqui deve estar o metodo de listar emprestimos
+    }
+    public void botaoSalvar(ActionEvent event){
+        Alert confirmarSalvar = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmarSalvar.setTitle("Confirmar Save");
+        confirmarSalvar.setHeaderText("Confirmar o armazenamento do progresso");
+        confirmarSalvar.setContentText("Aperte OK para confirmar o armazenamento do progresso realizado nesta sessão.");
+        if(confirmarSalvar.showAndWait().get() == ButtonType.OK){
+            Biblioteca.salvarListas();
+            Alert infoSalvar = new Alert(Alert.AlertType.INFORMATION);
+            infoSalvar.setTitle("Save Completo");
+            infoSalvar.setHeaderText("O progresso foi salvo.");
+            infoSalvar.setContentText("O progresso realizado na sessão foi salvo.");
+        }
+    }
+    public void botaoSalvarESair(ActionEvent event){
+        Alert confirmarSalvar = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmarSalvar.setTitle("Confirmar Save");
+        confirmarSalvar.setHeaderText("Confirmar o armazenamento do progresso");
+        confirmarSalvar.setContentText("Aperte OK para salvar o progresso realizado e sair.");
+        if(confirmarSalvar.showAndWait().get() == ButtonType.OK){
+            Biblioteca.salvarListas();
+            Alert infoSalvar = new Alert(Alert.AlertType.INFORMATION);
+            infoSalvar.setTitle("Save Completo");
+            infoSalvar.setHeaderText("O progresso foi salvo.");
+            infoSalvar.setContentText("O progresso realizado na sessão foi salvo.");
+            stage = (Stage)borderPane.getScene().getWindow();
+            stage.close();
+        }
+    }
+    public void botaoSairSemSalvar(ActionEvent event){
+        Alert confirmarSalvar = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmarSalvar.setTitle("Confirmar Fechamento");
+        confirmarSalvar.setHeaderText("Confirmar a saída do programa");
+        confirmarSalvar.setContentText("Aperte OK para sair do programa sem salvar. SEU PROGRESSO SERÁ PERDIDO!");
+        if(confirmarSalvar.showAndWait().get() == ButtonType.OK){
+            stage = (Stage)borderPane.getScene().getWindow();
+            stage.close();
+        }
     }
 }

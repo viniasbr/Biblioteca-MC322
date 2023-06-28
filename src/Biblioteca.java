@@ -421,6 +421,7 @@ public abstract class Biblioteca {
  
         // criar uma instancia emprestimo e add na lista de emprestimos
         Emprestimo emprestimo = new Emprestimo(leitor, livro, prazoEntrega);
+        livro.setEmUso(true);
         listaEmprestimos.add(emprestimo);
  
         return true;

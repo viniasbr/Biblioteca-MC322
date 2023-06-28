@@ -16,10 +16,10 @@
         <menus>
           <Menu mnemonicParsing="false" text="Arquivos">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Salvar Dados" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Salvar Dados e Sair" />
-                  <MenuItem mnemonicParsing="false" text="Sair Sem Salvar" />
+                   <MenuItem mnemonicParsing="false" onAction="#botaoSalvar" text="Salvar Dados" />
+                   <SeparatorMenuItem mnemonicParsing="false" />
+                   <MenuItem mnemonicParsing="false" onAction="#botaoSalvarESair" text="Salvar Dados e Sair" />
+                   <MenuItem mnemonicParsing="false" onAction="#botaoSairSemSalvar" text="Sair Sem Salvar" />
                </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Listar">
@@ -58,7 +58,7 @@
             <Menu mnemonicParsing="false" text="Data de Hoje">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#irParaSelecionarData" text="Especificar Data" />
-                  <MenuItem mnemonicParsing="false" text="Usar Data do Sistema" />
+                   <MenuItem mnemonicParsing="false" onAction="#usarDataDoSistema" text="Usar Data do Sistema" />
                </items>
             </Menu>
         </menus>
