@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class LivroRaro extends Livro {
-    private static int prazoDias = 7;
+    private static int prazoDias = 14;
 
     // construtor
     public LivroRaro(String nome, String genero, int idLivro){

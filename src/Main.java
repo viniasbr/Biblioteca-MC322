@@ -1,4 +1,3 @@
-import java.text.ParseException;
 import java.util.Scanner;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -50,18 +49,5 @@ public class Main extends Application{
             e.printStackTrace();
         }
     }
-
-    // OPERACOES
-
-    // cadastrar um livro
-    // cadastrar um leitor
-    // alugar um livro
-    // verificar os atrasos (diariamente)
-
-
-    // fazer toString das classes
-
-
-
 
 }
