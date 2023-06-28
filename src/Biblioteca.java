@@ -1,10 +1,7 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import javax.imageio.IIOException;
 
 import java.io.*;
 
@@ -98,7 +95,7 @@ public abstract class Biblioteca {
     }
     
     // operacao com arquivos 
-    public static void lerListaLeitor(){
+    public static void lerListas(){
         // pegar dos arquivos e passar para memoria
         String nomeArquivoLeitores = "dados/"+ usuarioBibli + "-leitores.txt";
         String nomeArquivoLivros = "dados/"+ usuarioBibli + "-livros.txt";
@@ -511,5 +508,10 @@ public abstract class Biblioteca {
             saida += "\n";
         }
         return saida;
+    }
+    public static void atualiarTemAtraso(){
+        for(Emprestimo e : listaEmprestimos)
+            if(e.getDataEntrega().isBefore(diaHoje))
+                e.getLeitor().setTemAtraso(true);
     }
 }
