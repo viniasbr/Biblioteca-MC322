@@ -163,7 +163,7 @@ public abstract class Biblioteca {
                     else{    // livro raro
                         for(int i = 0; i < listaLivrosRaros.size(); i++){
                             if(listaLivrosRaros.get(i).getIdLivro() == id_livro){
-                                livro = listaLivrosTrad.get(i);
+                                livro = listaLivrosRaros.get(i);
                             }
                         }
                     }
@@ -269,8 +269,6 @@ public abstract class Biblioteca {
         }
 
     }
-
-
     public static void cadastrarLeitor(String tipo, String nome){
         // leitor credenciado
         if(tipo.equalsIgnoreCase("CR")){
@@ -423,6 +421,7 @@ public abstract class Biblioteca {
  
         // criar uma instancia emprestimo e add na lista de emprestimos
         Emprestimo emprestimo = new Emprestimo(leitor, livro, prazoEntrega);
+        livro.setEmUso(true);
         listaEmprestimos.add(emprestimo);
  
         return true;

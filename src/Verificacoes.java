@@ -24,5 +24,15 @@ class Verificacoes {
         return true;
     }
 
+    protected static boolean verificaInt(String num){
+        try{
+            Integer.parseInt(num);
+        }
+        catch (Exception e){
+            return false;
+        }
+        return true;
+    }
+
 
 }
