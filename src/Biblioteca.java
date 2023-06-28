@@ -3,7 +3,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.File;
+
+import javax.imageio.IIOException;
+
 import java.io.*;
 
 
@@ -96,52 +98,185 @@ public abstract class Biblioteca {
     }
     
     // operacao com arquivos 
-    public static boolean lerListaLeitor(){
-        //File arquivoLeitores = new File("dados/"+ usuarioBibli + "-leitores.txt");
-        String arquivoLeitores = "dados/"+ usuarioBibli + "-leitores.txt";
+    public static void lerListaLeitor(){
+        // pegar dos arquivos e passar para memoria
+        String nomeArquivoLeitores = "dados/"+ usuarioBibli + "-leitores.txt";
+        String nomeArquivoLivros = "dados/"+ usuarioBibli + "-livros.txt";
+        String nomeArquivoEmprestimos = "dados/"+ usuarioBibli + "-emprestimos.txt";
 
-        try{
-            BufferedReader in = new Bu
-        }
-
-        return false;
-        
-    }
-
-    // operacao com arquivos 
-    public static boolean lerListaLivro(){
-        return false;
-    }
-
-    // operacao com arquivos 
-    public static boolean lerListaEmprestimo(){
-        return false;
-    }
-
-    // operacao com arquivos 
-    public static void salvarListas(){ // salvarListaLeitor, salvarListaLivro, salvarListaEmprestimo
         // os 3 arquivos existem: basta ler e jogar na memoria
         if(arquivosExistem() == 1){
-            
-        }
-        // nenhum dos 3 arquivos existe: criar os 3
-        else if(arquivosExistem() == 0){
+            try(BufferedReader readerLeitor = new BufferedReader(new FileReader(nomeArquivoLeitores))){
+                String inLine;
+                while((inLine = readerLeitor.readLine()) != null){
+                    String[] array = inLine.split(",");
+                    int id = Integer.parseInt(array[0]);
+                    String nome = array[1];
 
-        }
-        // 1 existe e dois nao; ou 2 existem e 1 nao: apagar os existentes e criar os 3
-        else{
+                    if(id % 2 == 0){    // leitor comum
+                        listaLeitoresCom.add(new LeitorComum(nome, id));
+                    }
+                    else{    // leitor credenciado
+                        listaLeitoresCred.add(new LeitorCredenciado(nome, id));
+                    }
+                }
+            }
+            catch(IOException ex){
+                ex.printStackTrace();
+            }
 
+            try(BufferedReader readerLivro = new BufferedReader(new FileReader(nomeArquivoLivros))){
+                String inLine;
+                while((inLine = readerLivro.readLine()) != null){
+                    String[] array = inLine.split(",");
+                    int id = Integer.parseInt(array[0]);
+                    String nome = array[1];
+                    String genero = array[2];
+
+                    if(id % 2 == 0){    // livro tradicional
+                        listaLivrosTrad.add(new LivroTradicional(nome, genero, id));
+                    }
+                    else{    // livro raro
+                        listaLivrosRaros.add(new LivroRaro(nome, genero, id));
+                    }
+                }
+            }
+            catch(IOException ex){
+                ex.printStackTrace();
+            }
+
+            try(BufferedReader readerEmprestimo = new BufferedReader(new FileReader(nomeArquivoEmprestimos))){
+                String inLine;
+                while((inLine = readerEmprestimo.readLine()) != null){
+                    String[] array = inLine.split(",");
+                    int id_livro = Integer.parseInt(array[0]);
+                    int id_leitor = Integer.parseInt(array[1]);
+                    LocalDate data = LocalDate.parse(array[2], Verificacoes.formatadorData);
+
+                    Livro livro = null;
+                    Leitor leitor = null;
+
+                    if(id_livro % 2 == 0){    // livro tradicional
+                        for(int i = 0; i < listaLivrosTrad.size(); i++){
+                            if(listaLivrosTrad.get(i).getIdLivro() == id_livro){
+                                livro = listaLivrosTrad.get(i);
+                            }
+                        }
+                    }
+                    else{    // livro raro
+                        for(int i = 0; i < listaLivrosRaros.size(); i++){
+                            if(listaLivrosRaros.get(i).getIdLivro() == id_livro){
+                                livro = listaLivrosTrad.get(i);
+                            }
+                        }
+                    }
+
+                    if(id_leitor % 2 == 0){    // leitor comum
+                        for(int i = 0; i < listaLeitoresCom.size(); i++){
+                            if(listaLeitoresCom.get(i).getIdLeitor() == id_leitor){
+                                leitor = listaLeitoresCom.get(i);
+                            }
+                        }
+                    }
+                    else{    // leitor credenciado
+                        for(int i = 0; i < listaLeitoresCred.size(); i++){
+                            if(listaLeitoresCred.get(i).getIdLeitor() == id_leitor){
+                                leitor = listaLeitoresCred.get(i);
+                            }
+                        }
+                    }
+
+                    Emprestimo emprestimo = new Emprestimo(leitor, livro, data);
+                    emprestimo.getLivro().setEmUso(true);
+                    listaEmprestimos.add(emprestimo);
+
+                }
+            }
+            catch(IOException ex){
+                ex.printStackTrace();
+            }
         }
-        File arquivoLeitores = new File("dados/"+ usuarioBibli + "-leitores.txt");
+    }
+
+
+    // operacao com arquivos 
+    public static void salvarListas(){ 
+        // eh a juncao de salvarListaLeitor, salvarListaLivro, salvarListaEmprestimo
+        // pegar da memoria e passar para arquivos
+        String nomeArquivoLeitores = "dados/" + usuarioBibli + "-leitores.txt";
+        String nomeArquivoLivros = "dados/"+ usuarioBibli + "-livros.txt";
+        String nomeArquivoEmprestimos = "dados/"+ usuarioBibli + "-emprestimos.txt";
+
+        File arquivoLeitores = new File(nomeArquivoLeitores);
+        File arquivoLivros = new File(nomeArquivoLivros);
+        File arquivoEmprestimos = new File(nomeArquivoEmprestimos);
+        File dados = new File("dados");
+
+        if(!(dados.exists())){
+            dados.mkdir();
+        }
+
+        // apagando arquivos previos a manipulacao da biblioteca
+        if(arquivoLeitores.exists()){
+            arquivoLeitores.delete();
+        }
+        if(arquivoLivros.exists()){
+            arquivoLivros.delete();
+        }
+        if(arquivoEmprestimos.exists()){
+            arquivoEmprestimos.delete();
+        }
+
+        // escrevendo conteudo
+        try(BufferedWriter writerLeitores = new BufferedWriter(new FileWriter(nomeArquivoLeitores))){
+            for(Leitor leitor : listaLeitoresCom){
+                String linha = leitor.getIdLeitor() + "," + leitor.getNome();
+                writerLeitores.write(linha);
+                writerLeitores.newLine();
+            }
+            for(Leitor leitor : listaLeitoresCred){
+                String linha = leitor.getIdLeitor() + "," + leitor.getNome();
+                writerLeitores.write(linha);
+                writerLeitores.newLine();
+            }
+        }
+        catch (IOException ex){
+            ex.printStackTrace();
+        }
+
+        try(BufferedWriter writerLivros = new BufferedWriter(new FileWriter(nomeArquivoLivros))){
+            for(Livro livro : listaLivrosTrad){
+                String linha = livro.getIdLivro() + "," + livro.getNome() + "," +livro.getGenero();
+                writerLivros.write(linha);
+                writerLivros.newLine();
+            }
+            for(Livro livro : listaLivrosRaros){
+                String linha = livro.getIdLivro() + "," + livro.getNome() + "," +livro.getGenero();
+                writerLivros.write(linha);
+                writerLivros.newLine();
+            }
+        }
+        catch (IOException ex){
+            ex.printStackTrace();
+        }
+
+        try(BufferedWriter writerEmprestimos = new BufferedWriter(new FileWriter(nomeArquivoEmprestimos))){
+            for(Emprestimo emprestimo : listaEmprestimos){
+                String linha = emprestimo.getLivro().getIdLivro()+","+emprestimo.getLeitor().getIdLeitor()+"," + emprestimo.getDataEntrega().format(Verificacoes.formatadorData);
+                writerEmprestimos.write(linha);
+                writerEmprestimos.newLine();
+            }
+        }
+        catch (IOException ex){
+            ex.printStackTrace();
+        }
 
     }
 
 
-    public static void cadastrarLeitor(String tipo){
+    public static void cadastrarLeitor(String tipo, String nome){
         // leitor credenciado
         if(tipo.equalsIgnoreCase("CR")){
-            System.out.println("Digite o nome do leitor:");
-            String nome_cr = read.nextLine();
             boolean id_novo = false;
             int idLeitorCred = LeitorCredenciado.geraIdLeitorCred();
             while(!id_novo){
@@ -157,14 +292,12 @@ public abstract class Biblioteca {
                 else
                     idLeitorCred = LeitorCredenciado.geraIdLeitorCred();
             }
-            LeitorCredenciado leitorCred = new LeitorCredenciado(nome_cr, idLeitorCred);
+            LeitorCredenciado leitorCred = new LeitorCredenciado(nome, idLeitorCred);
             listaLeitoresCred.add(leitorCred);
         }
 
         // leitor comum
         else if(tipo.equalsIgnoreCase("CO")){
-            System.out.println("Digite o nome do leitor:");
-            String nome_co = read.nextLine();
             boolean id_novo = false;
             int idLeitorComum = LeitorComum.geraIdLeitorComum();
             while(!id_novo){
@@ -180,7 +313,7 @@ public abstract class Biblioteca {
                 else
                     idLeitorComum = LeitorComum.geraIdLeitorComum();
             }
-            LeitorComum leitorComum = new LeitorComum(nome_co, idLeitorComum);
+            LeitorComum leitorComum = new LeitorComum(nome, idLeitorComum);
             listaLeitoresCom.add(leitorComum);
         }
 

@@ -15,27 +15,22 @@ public class Main {
 
     }
     public static void main(String[] args) throws ParseException {
-        System.out.println("Bem-vindo(a) ao sistema de bibliotecas!");
-        System.out.println("Entre com o usuario da sua biblioteca: ");
-        System.out.println("-------------------------------");
-        System.out.println("ATENCAO PARA O FORMATO DO NOME DE USUARIO:");
-        System.out.println("o nome de usuario nao pode conter espacos");
-        System.out.println("-------------------------------");
-        String usuarioBiblioteca = read.nextLine();
-        // colocar condicional se existe documento com o nome
+        // System.out.println("Bem-vindo(a) ao sistema de bibliotecas!");
+        // System.out.println("Entre com o usuario da sua biblioteca: ");
+        // System.out.println("-------------------------------");
+        // System.out.println("ATENCAO PARA O FORMATO DO NOME DE USUARIO:");
+        // System.out.println("o nome de usuario nao pode conter espacos");
+        // System.out.println("------------");
+
+        Biblioteca.setUsuarioBibli("bibteste");
+        Biblioteca.cadastrarLeitor("CO", "jas");
+        Biblioteca.cadastrarLeitor("CR", "br");
+        Biblioteca.cadastrarLivro("TR", "biblia", "chato");
+        Biblioteca.cadastrarLivro("RA", "bla", "genbla");
+        Biblioteca.emprestarLivro(Biblioteca.getListaLivrosTrad().get(0).getIdLivro(),Biblioteca.getListaLeitoresCom().get(0).getIdLeitor());
+        Biblioteca.emprestarLivro(Biblioteca.getListaLivrosRaros().get(0).getIdLivro(),Biblioteca.getListaLeitoresCred().get(0).getIdLeitor());
+        Biblioteca.salvarListas();
+
     }
-
-    // OPERACOES
-
-    // cadastrar um livro
-    // cadastrar um leitor
-    // alugar um livro
-    // verificar os atrasos (diariamente)
-
-
-    // fazer toString das classes
-
-
-
 
 }
