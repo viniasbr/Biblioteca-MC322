@@ -40,6 +40,8 @@ public class ControladorLogin {
         if(Verificacoes.verificaUsuario(username)) {
             if(alertaUsernameValido.showAndWait().get() == ButtonType.OK){
                 Biblioteca.setUsuarioBibli(username);
+                Biblioteca.lerListas();
+                Biblioteca.atualiarTemAtraso();
                 Parent root = FXMLLoader.load(getClass().getResource("Menu Inicial.fxml"));
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root);

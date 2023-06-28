@@ -163,7 +163,7 @@ public abstract class Biblioteca {
                     else{    // livro raro
                         for(int i = 0; i < listaLivrosRaros.size(); i++){
                             if(listaLivrosRaros.get(i).getIdLivro() == id_livro){
-                                livro = listaLivrosTrad.get(i);
+                                livro = listaLivrosRaros.get(i);
                             }
                         }
                     }

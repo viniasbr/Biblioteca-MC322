@@ -132,6 +132,7 @@ public class ControladorMenu {
     }
     public void usarDataDoSistema(ActionEvent event){
         Biblioteca.setDiaHoje(LocalDate.now());
+        Biblioteca.atualiarTemAtraso();
         Alert aviso = new Alert(Alert.AlertType.INFORMATION);
         aviso.setTitle("Data Atualizada");
         aviso.setHeaderText("A data do sistema foi atualizada");
@@ -140,6 +141,7 @@ public class ControladorMenu {
     }
     public void confirmarDataEscolhida(ActionEvent event){
         Biblioteca.setDiaHoje(dataEscolhida);
+        Biblioteca.atualiarTemAtraso();
         Alert aviso = new Alert(Alert.AlertType.INFORMATION);
         aviso.setTitle("Data Atualizada");
         aviso.setHeaderText("A data do sistema foi atualizada");
@@ -271,15 +273,15 @@ public class ControladorMenu {
         }
     }
     public void botaoListarLeitores(ActionEvent event){
-        areaListarLeitor.setText("O rato\nroeu\na roupa\ndo rei\nde roma");//Aqui deve estar o metodo de listar leitores
+        areaListarLeitor.setText(Biblioteca.listarLeitores());//Aqui deve estar o metodo de listar leitores
     }
     public void botaoListarLivros(ActionEvent event){
-        areaListarLivros.setText("O rato\nroeu\na roupa\ndo rei\nde roma");//Aqui deve estar o metodo de listar livros
+        areaListarLivros.setText(Biblioteca.listarLivros());//Aqui deve estar o metodo de listar livros
     }
     public void botaoListarEmprestimos(ActionEvent event){
-        areaListarEmprestimos.setText("O rato\nroeu\na roupa\ndo rei\nde roma");//Aqui deve estar o metodo de listar emprestimos
+        areaListarEmprestimos.setText(Biblioteca.listarEmprestimos());//Aqui deve estar o metodo de listar emprestimos
     }
     public void botaoListarEmprestimosDevolucao(ActionEvent event){
-        areaListarEmprestimosDevolucao.setText("O rato\nroeu\na roupa\ndo rei\nde roma");//Aqui deve estar o metodo de listar emprestimos
+        areaListarEmprestimosDevolucao.setText(Biblioteca.listarEmprestimos());//Aqui deve estar o metodo de listar emprestimos
     }
 }
