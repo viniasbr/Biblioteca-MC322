@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="208.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControladorMenu">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Arquivos">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Salvar Dados" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Salvar Dados e Sair" />
+                  <MenuItem mnemonicParsing="false" text="Sair Sem Salvar" />
+               </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Listar">
+               <items>
+                   <MenuItem mnemonicParsing="false" onAction="#irPararListarLeitores" text="Leitores" />
+                   <MenuItem mnemonicParsing="false" onAction="#irPararListarLivros" text="Livros" />
+                   <MenuItem mnemonicParsing="false" onAction="#irPararListarEmprestimos" text="Empréstimos" />
+               </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Cadastrar">
+               <items>
+                  <Menu mnemonicParsing="false" text="Cliente">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#irParaCadastrarClienteComum" text="Cadastrar Cliente Comum" />
+                      <MenuItem mnemonicParsing="false" onAction="#irParaCadastrarClienteCredenciado" text="Cadastrar Cliente Credenciado" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Livro">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#irParaCadastrarLivroComum" text="Cadastrar Livro Comum" />
+                        <MenuItem mnemonicParsing="false" onAction="#irParaCadastrarLivroRaro" text="Cadastrar Livro Raro" />
+                    </items>
+                  </Menu>
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Empréstimo">
+               <items>
+                   <MenuItem mnemonicParsing="false" onAction="#irParaEmprestarLivro" text="Emprestar Livro" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Devolução">
+               <items>
+                   <MenuItem mnemonicParsing="false" onAction="#irParaDevolucao" text="Devolver Livro" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Verificar Atraso" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Data de Hoje">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#irParaSelecionarData" onMenuValidation="#irParaSelecionarData" text="Especificar Data" />
+                  <MenuItem mnemonicParsing="false" onAction="#usarDataDoSistema" text="Usar Data do Sistema" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <AnchorPane prefHeight="124.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="66.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@IconeBiblioteca.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="249.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SISTEMA DE">
+               <font>
+                  <Font name="System Bold" size="44.0" />
+               </font>
+            </Text>
+            <Text layoutX="249.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BIBLIOTECAS">
+               <font>
+                  <Font name="System Bold" size="44.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

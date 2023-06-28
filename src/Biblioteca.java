@@ -269,8 +269,6 @@ public abstract class Biblioteca {
         }
 
     }
-
-
     public static void cadastrarLeitor(String tipo, String nome){
         // leitor credenciado
         if(tipo.equalsIgnoreCase("CR")){
