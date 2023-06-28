@@ -172,7 +172,7 @@ public class ControladorMenu {
         confirmarNome.setContentText("Aperte OK para confirmar o nome \"" + nome + "\" do cliente comum");
         if(confirmarNome.showAndWait().get() == ButtonType.OK)
         {
-            Biblioteca.cadastrarLeitor("CA",nome);
+            Biblioteca.cadastrarLeitor("CO",nome);
             Alert aviso = new Alert(Alert.AlertType.INFORMATION);
             aviso.setTitle("Cliente Comum Cadastrado");
             aviso.setHeaderText("O cliente comum foi cadastrado");
